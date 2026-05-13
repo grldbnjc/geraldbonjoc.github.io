@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Toast Container -->
+  <div id="toastContainer"></div>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <div class="logo">Task<span>Flow</span></div>
+      <button id="toggleTheme" class="theme-btn" title="Toggle theme">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </header>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-value" id="statTotal">0</span>
+        <span class="stat-label">Total</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="statActive">0</span>
+        <span class="stat-label">Active</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="statDone">0</span>
+        <span class="stat-label">Done</span>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-pct" id="progressPct">0%</span>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form id="taskForm" class="task-form">
+      <input type="text" id="title" placeholder="What needs to be done?" autocomplete="off" required />
+      <textarea id="description" placeholder="Add details (optional)…" rows="2"></textarea>
+      <div class="form-row">
+        <select id="priority">
+          <option value="low">🟢 Low</option>
+          <option value="medium" selected>🟡 Medium</option>
+          <option value="high">🔴 High</option>
+        </select>
+        <input type="date" id="dueDate" title="Due date" />
+        <button type="submit" class="primary-btn">+ Add Task</button>
+      </div>
+    </form>
+
+    <!-- Search + Filters -->
+    <div class="controls">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search tasks…" autocomplete="off" />
+      </div>
+      <div class="filters">
+        <button data-filter="all" class="active">All <span class="badge" id="badgeAll">0</span></button>
+        <button data-filter="active">Active <span class="badge" id="badgeActive">0</span></button>
+        <button data-filter="completed">Done <span class="badge" id="badgeDone">0</span></button>
+      </div>
+    </div>
+
+    <!-- Task List -->
+    <div id="taskList"></div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="empty-state hidden">
+      <div class="empty-icon">📋</div>
+      <p>No tasks here yet.</p>
+      <small>Add one above to get started.</small>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="footer-actions">
+      <span id="footerCount" class="footer-count"></span>
+      <button id="clearCompleted" class="danger-btn">Clear Completed</button>
+    </div>
+
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Edit Task</h2>
+        <button class="modal-close" id="closeModal">✕</button>
+      </div>
+      <input type="text" id="editTitle" placeholder="Task title" />
+      <textarea id="editDesc" placeholder="Details…" rows="3"></textarea>
+      <div class="form-row">
+        <select id="editPriority">
+          <option value="low">🟢 Low</option>
+          <option value="medium">🟡 Medium</option>
+          <option value="high">🔴 High</option>
+        </select>
+        <input type="date" id="editDue" />
+      </div>
+      <div class="modal-actions">
+        <button id="saveEdit" class="primary-btn">Save Changes</button>
+        <button id="cancelEdit" class="ghost-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

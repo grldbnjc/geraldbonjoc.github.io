@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget & Expense Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <h1>💰 Budget Tracker</h1>
+      <p>Real-time currency conversion · Track every peso, dollar &amp; euro</p>
+    </div>
+    <div class="header-right">
+      <div class="rate-badge">
+        <span class="rate-dot" id="rate-dot"></span>
+        <span id="rate-status">Fetching rates…</span>
+      </div>
+      <div class="ctrl-group">
+        <label>Display in</label>
+        <select id="currency-sel">
+          <option value="USD">USD $</option>
+          <option value="EUR">EUR €</option>
+          <option value="PHP" selected>PHP ₱</option>
+          <option value="JPY">JPY ¥</option>
+          <option value="GBP">GBP £</option>
+          <option value="AUD">AUD A$</option>
+          <option value="SGD">SGD S$</option>
+          <option value="KRW">KRW ₩</option>
+        </select>
+      </div>
+      <button class="theme-btn" id="theme-btn" title="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <!-- Summary -->
+  <div class="summary">
+    <div class="sum-card">
+      <div class="label">Total Balance</div>
+      <div class="value" id="s-balance">—</div>
+      <div class="icon">⚖️</div>
+    </div>
+    <div class="sum-card income">
+      <div class="label">Total Income</div>
+      <div class="value" id="s-income">—</div>
+      <div class="icon">📈</div>
+    </div>
+    <div class="sum-card expense">
+      <div class="label">Total Expenses</div>
+      <div class="value" id="s-expense">—</div>
+      <div class="icon">📉</div>
+    </div>
+  </div>
+
+  <!-- Main Grid -->
+  <div class="grid">
+
+    <!-- Form Panel -->
+    <div class="panel">
+      <div class="panel-head"><h2>Add Transaction</h2></div>
+      <div class="panel-body">
+
+        <!-- Income / Expense toggle -->
+        <div class="form-group">
+          <div class="type-toggle">
+            <input type="radio" id="type-income" name="tx-type" value="Income" checked>
+            <input type="radio" id="type-expense" name="tx-type" value="Expense">
+            <label for="type-income" class="tog-income">+ Income</label>
+            <label for="type-expense" class="tog-expense">− Expense</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label">Description</label>
+          <input type="text" id="desc" placeholder="e.g. Grocery run, Salary…">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="field-label">Amount</label>
+            <div class="amount-wrap">
+              <span class="sym" id="input-sym">₱</span>
+              <input type="number" id="amount" step="0.01" min="0" placeholder="0.00">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="field-label">Entry Currency</label>
+            <select class="field-select" id="entry-currency">
+              <option value="USD">USD $</option>
+              <option value="EUR">EUR €</option>
+              <option value="PHP" selected>PHP ₱</option>
+              <option value="JPY">JPY ¥</option>
+              <option value="GBP">GBP £</option>
+              <option value="AUD">AUD A$</option>
+              <option value="SGD">SGD S$</option>
+              <option value="KRW">KRW ₩</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="field-label">Category</label>
+            <select class="field-select" id="category">
+              <option value="Food">🍜 Food</option>
+              <option value="Transport">🚌 Transport</option>
+              <option value="Entertainment">🎮 Entertainment</option>
+              <option value="Bills">💡 Bills</option>
+              <option value="Shopping">🛍️ Shopping</option>
+              <option value="Health">🏥 Health</option>
+              <option value="Salary">💼 Salary</option>
+              <option value="Other">📦 Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="field-label">Date</label>
+            <input type="date" id="date">
+          </div>
+        </div>
+
+        <button class="btn-add" id="add-btn">Add Transaction</button>
+
+        <!-- Category Breakdown -->
+        <div class="breakdown">
+          <div class="breakdown-title">Expense Breakdown</div>
+          <div id="cat-breakdown"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Panel -->
+    <div class="panel">
+      <div class="panel-head">
+        <h2>History</h2>
+        <select class="filter-select" id="filter-sel">
+          <option value="All">All Transactions</option>
+          <option value="Income">Income only</option>
+          <option value="Food">🍜 Food</option>
+          <option value="Transport">🚌 Transport</option>
+          <option value="Entertainment">🎮 Entertainment</option>
+          <option value="Bills">💡 Bills</option>
+          <option value="Shopping">🛍️ Shopping</option>
+          <option value="Health">🏥 Health</option>
+          <option value="Salary">💼 Salary</option>
+          <option value="Other">📦 Other</option>
+        </select>
+      </div>
+      <ul class="tx-list" id="tx-list"></ul>
+    </div>
+
+  </div><!-- /grid -->
+</div><!-- /wrap -->
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

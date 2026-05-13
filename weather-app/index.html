@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkyCast — Philippine Weather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="bg-canvas">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+
+  <div class="app">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">Sky<span>Cast</span></div>
+      <div class="unit-toggle">
+        <button class="unit-btn active" id="btnC" onclick="setUnit('C')">°C</button>
+        <button class="unit-btn" id="btnF" onclick="setUnit('F')">°F</button>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrap">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input
+          class="search-input"
+          id="cityInput"
+          type="text"
+          placeholder="Search city…"
+          onkeydown="if(event.key==='Enter') getWeather()"
+          autocomplete="off"
+        />
+      </div>
+      <button class="icon-btn" onclick="geoLocate()" title="Use my location">📍</button>
+      <button class="search-btn" onclick="getWeather()">Search</button>
+    </div>
+
+    <!-- Quick PH Cities -->
+    <div class="quick-cities">
+      <button class="city-pill" onclick="quickSearch('Manila')">🗺 Manila</button>
+      <button class="city-pill" onclick="quickSearch('Cebu City')">🏙 Cebu</button>
+      <button class="city-pill" onclick="quickSearch('Davao City')">🌿 Davao</button>
+      <button class="city-pill" onclick="quickSearch('Quezon City')">🏙 Q.C.</button>
+      <button class="city-pill" onclick="quickSearch('Baguio')">🌲 Baguio</button>
+      <button class="city-pill" onclick="quickSearch('Palawan')">🏝 Palawan</button>
+    </div>
+
+    <!-- Status / Error -->
+    <div class="status" id="statusEl">
+      <div class="spinner"></div>
+      <span id="statusText">Fetching weather…</span>
+    </div>
+    <div class="error-msg" id="errorEl"></div>
+
+    <!-- Main Weather Card -->
+    <div class="main-card" id="mainCard">
+
+      <div class="location-row">
+        <div class="location-name">
+          <span class="location-pin">📍</span>
+          <span id="cityName">—</span>
+        </div>
+        <div class="local-time" id="localTime">—</div>
+      </div>
+
+      <div class="weather-main">
+        <div>
+          <div class="temp-display">
+            <span id="tempVal">—</span><span class="temp-unit" id="tempUnitLabel">°C</span>
+          </div>
+          <div class="condition-text" id="conditionText">—</div>
+          <div class="feels-like">Feels like <span id="feelsLike">—</span></div>
+        </div>
+        <div class="weather-icon-big" id="weatherIcon">🌤</div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-icon">💧</span>
+          <div>
+            <div class="stat-label">Humidity</div>
+            <div class="stat-value" id="humidity">—</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">💨</span>
+          <div>
+            <div class="stat-label">Wind</div>
+            <div class="stat-value" id="wind">—</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">🌧</span>
+          <div>
+            <div class="stat-label">Precipitation</div>
+            <div class="stat-value" id="precip">—</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">☀️</span>
+          <div>
+            <div class="stat-label">UV Index</div>
+            <div class="stat-value" id="uvIndex">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="forecast-label">5-Day Forecast</div>
+      <div class="forecast-row" id="forecastRow"></div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
